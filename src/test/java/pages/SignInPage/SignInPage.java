@@ -9,6 +9,7 @@ public class SignInPage extends BasePage {
     public static final Logger LOG = LoggerFactory.getLogger(SignInPage.class);
     public static SignInPage instance;
 
+
     private SignInPage() {
     }
 
@@ -23,6 +24,8 @@ public class SignInPage extends BasePage {
     private By logo = By.id("logo");
     private By emailField = By.xpath("//input[@ng-model='Email']");
     private By passwordField = By.xpath("//input[@ng-model='Password']");
+    private By enterButton = By.id("enterbtn");
+    private By skipSignInButton = By.id("btn2");
 
     public void clickSignInButton() {
         LOG.info("Click 'Sign in' button");
@@ -38,8 +41,38 @@ public class SignInPage extends BasePage {
     public boolean isLogoDisplayed() {
         LOG.info("Verify if Logo image is displayed");
         return driver.findElement(logo).isDisplayed();
+
     }
 
+    public void insertEmail(String Email) {
+        LOG.info("input 'Email' in field");
+        driver.findElement(emailField).sendKeys("Email");
+
+    }
+
+    public void insertPassword(String Password) {
+        LOG.info("input 'Password' in field");
+        driver.findElement(passwordField).sendKeys("Password");
+
+    }
+
+    public void clickEnterButton() {
+        LOG.info("Click 'Enter' button");
+        driver.findElement(enterButton).click();
+
+    }
+
+    public void clickSkipSignInButton() {
+        LOG.info("Click 'Skip Sign In' button");
+        driver.findElement(skipSignInButton).click();
+    }
+
+    public void clickBack(){
+        LOG.info("Click back in browser");
+        driver.navigate().back();
+    }
 }
+
+
 
 
