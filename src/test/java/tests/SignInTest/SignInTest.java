@@ -11,6 +11,7 @@ public class SignInTest extends BaseTest {
 
     @Test
     public void signIn() {
+
         String email = "abc@email.com";
         String password = "password1";
 
@@ -37,8 +38,6 @@ public class SignInTest extends BaseTest {
 
         LOG.info("Click 'Skip Sign In' button");
         signInPage.clickSkipSignInButton();
-
-
 
     }
 

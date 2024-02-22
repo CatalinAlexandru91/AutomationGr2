@@ -26,6 +26,9 @@ public class SignInPage extends BasePage {
     private By passwordField = By.xpath("//input[@ng-model='Password']");
     private By enterButton = By.id("enterbtn");
     private By skipSignInButton = By.id("btn2");
+    private By emailInputField = By.id("email");
+    private By signup = By.id("email");
+    private By registerButton = By.id("enterimg");
 
     public void clickSignInButton() {
         LOG.info("Click 'Sign in' button");
@@ -62,16 +65,32 @@ public class SignInPage extends BasePage {
 
     }
 
+    public void clickBack() {
+        LOG.info("Click back in browser");
+        driver.navigate().back();
+
+    }
+
     public void clickSkipSignInButton() {
         LOG.info("Click 'Skip Sign In' button");
         driver.findElement(skipSignInButton).click();
     }
 
-    public void clickBack(){
-        LOG.info("Click back in browser");
-        driver.navigate().back();
+    public void email(String email) {
+        LOG.info("Insert email adress");
+        driver.findElement(signup).sendKeys(email);
     }
+
+    public void clickRegisterButton() {
+        LOG.info("Click Register button");
+        driver.findElement(registerButton).click();
+
+    }
+
+
 }
+    
+
 
 
 
