@@ -20,7 +20,6 @@ public class BasePage {
         LOG.info("Open browder maximize");
         driver.manage().window().maximize();
     }
-
     public static void tearDown() {
         LOG.info("Close the browser");
         driver.quit();
@@ -45,4 +44,6 @@ public class BasePage {
             e.printStackTrace();
         }
     }
+
+
 }

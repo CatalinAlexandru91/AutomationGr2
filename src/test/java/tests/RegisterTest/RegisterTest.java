@@ -5,8 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
 import tests.BaseTest;
 
-import static pages.BasePage.driver;
-import static pages.BasePage.getBaseUrl;
+import static pages.BasePage.*;
 
 public class RegisterTest extends BaseTest {
     public static final Logger LOG = LoggerFactory.getLogger(RegisterTest.class);
@@ -17,12 +16,13 @@ public class RegisterTest extends BaseTest {
     String address = "Bulevardul Ferdinand 97";
     String emailaddress = "xyz@yahoo.com";
     String phonenumber = "0722222222";
+    String password = "hahaha123";
 
 
     @Test
-
     public void fillRegister() {
         driver.get(newUrl);
+        sleep(3000L);
 
         LOG.info("Click 'Consent' button");
         registerPage.clickConsentButton();
@@ -50,6 +50,42 @@ public class RegisterTest extends BaseTest {
 
         LOG.info("Select Languages");
         registerPage.selectLanguages();
+
+        LOG.info("Select 'Java' skill");
+        registerPage.selectJavaSkill();
+
+        LOG.info("Select 'Romania' option");
+        registerPage.selectCountry();
+
+        LOG.info("Select '1991' option");
+        registerPage.selectBirthYear();
+
+        LOG.info("Select 'July' option");
+        registerPage.selectBirthMonth();
+
+        LOG.info("Select '27' option");
+        registerPage.selectBirthDay();
+
+        LOG.info("Insert 'Password'");
+        signInPage.insertPassword(password);
+
+        LOG.info("Confirm 'Password'");
+        signInPage.insertPassword(password);
+
+        LOG.info("Verify if 'Choose file' button is displayed");
+        registerPage.isUploadButtonDisplayed();
+
+        LOG.info("Click 'Refresh' button");
+        registerPage.clickRefreshButton();
+
+        LOG.info("Click 'Submit' button");
+        registerPage.clickSubmitButton();
+
+
+
+
+
+
 
     }
 
