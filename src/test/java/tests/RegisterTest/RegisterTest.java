@@ -14,7 +14,7 @@ public class RegisterTest extends BaseTest {
     String firstName = "Ion";
     String lastName = "Popescu";
     String address = "Bulevardul Ferdinand 97";
-    String emailaddress = "xyz@yahoo.com";
+    String emailaddress = "xyz2@yahoo.com";
     String phonenumber = "0722222222";
     String password = "hahaha123";
 
