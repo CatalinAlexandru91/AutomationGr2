@@ -25,6 +25,9 @@ public class RegisterTest extends BaseTest {
     String year = "1991";
     String month = "February";
     String day = "29";
+    String password = "asdfgh";
+    String confirmpassword = "asdfgh";
+
 
     @Test
     public void fillRegister() {
@@ -66,6 +69,22 @@ public class RegisterTest extends BaseTest {
 
         LOG.info("Upload file");
         registerPage.chooseFile();
+
+        LOG.info("Input password in field");
+        registerPage.inputPassword(password);
+
+        LOG.info("Confirm password in field");
+        registerPage.confirmPassword(confirmpassword);
+
+        LOG.info("Clicking 'Submit' button");
+        registerPage.clickSubmitButton();
+
+        LOG.info("Clicking 'Refresh' button");
+        registerPage.clickRefreshButton();
+
+
+
+
 
 
 

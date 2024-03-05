@@ -41,7 +41,11 @@ public class RegisterPage extends BasePage {
     private By selectYear = By.id("yearbox");
     private By selectMonth = By.xpath("//select[@ng-model='monthbox']");
     private By selectDay = By.id("daybox");
-    private By chooseFile = By.xpath("//input[@type=\"file\"]");
+    private By chooseFile = By.id("imagesrc");
+    private By passwordField = By.id("firstpassword");
+    private By confirmPassword = By.id("secondpassword");
+    private By submitButton = By.id("submitbtn");
+    private By refreshButton = By.xpath("//button[@value=\"Refresh\"]");
 
     public void insertFullName(String fName, String lName) {
         LOG.info("Inserting FirstName and LastName");
@@ -121,13 +125,36 @@ public class RegisterPage extends BasePage {
 
     public void chooseFile() {
         LOG.info("Upload file");
-        WebElement fileInput = driver.findElement(By.xpath("//input[@type=\"file\"]"));
+        WebElement fileInput = driver.findElement(chooseFile);
         fileInput.sendKeys("C:/Users/PC/Desktop/Ronnie-Coleman-7.webp");
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("uploadimg()");
 
     }
 
+    public void inputPassword(String password) {
+        LOG.info("Input password in field");
+        driver.findElement(passwordField).sendKeys(password);
+
+    }
+
+    public void confirmPassword(String confirmpassword) {
+        LOG.info("Confirm password in field");
+        driver.findElement(confirmPassword).sendKeys(confirmpassword);
+
+    }
+
+    public void clickSubmitButton() {
+        sleep(3000);
+        LOG.info("Clicking 'Submit' button");
+        driver.findElement(submitButton).click();
+
+    }
+
+    public void clickRefreshButton() {
+        LOG.info("Clicking 'Refresh' button");
+        driver.findElement(refreshButton).click();
+
+
+    }
 }
 
 
