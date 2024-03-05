@@ -1,6 +1,10 @@
 package pages.RegisterPage;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pages.BasePage;
@@ -19,138 +23,111 @@ public class RegisterPage extends BasePage {
         return instance;
     }
 
-    private By consentButton = By.xpath("//p[text()='Consent']");
     private By inputFirstName = By.xpath("//input[@ng-model='FirstName']");
     private By inputLastName = By.xpath("//input[@ng-model='LastName']");
     private By inputAddress = By.xpath("//textarea[@ng-model='Adress']");
-    private By inputEmailAddress = By.xpath("ng-model='EmailAdress']");
-    private By inputPhoneNumber = By.xpath("//input[@ng-model='Phone']");
-    private By selectGender = By.xpath("//input[@type = 'radio' and @value = 'Male']");
-    private By selectHobby = By.id("checkbox1");
-    private By inputLanguages = By.id("msdd");
-    private By selectLanguage1 = By.xpath("//a[@class='ui-corner-all' and text()='Romanian']");
-    private By selectLanguage2 = By.xpath("//a[@class='ui-corner-all' and text()='English']");
+    private By inputEmail = By.xpath("//input[@type='email']");
+    private By inputPhoneNUmber = By.xpath("//input[@ng-model='Phone']");
+    private By maleGender = By.xpath("//input[@value='Male']");
+    private By femaleGender = By.xpath("//input[@value='FeMale']");
+    private By cricketCheckmarks = By.id("checkbox1");
+    private By moviesCheckmarks = By.id("checkbox2");
+    private By hockeyCheckmarks = By.id("checkbox3");
+    private By languageField = By.id("msdd");
+    String selectLanguage = "//a[contains(text(), '%s')]";
     private By selectSkills = By.id("Skills");
-    private By selectCountry = By.id("countries");
-    private By selectBirthYear = By.xpath("//select[@id='yearbox']/option[@value='1991']");
-    private By selectBirthMonth = By.xpath("//select[@ng-model='monthbox']/option[@value='July']");
-    private By selectBirthDay = By.xpath("//select[@id='daybox']/option[@value='27']");
-    private By inputPassword = By.id("firstpassword");
-    private By confirmPassword = By.id("secondpassword");
-    private By uploadPhoto = By.id("imagesrc");
-    private By refreshButton = By.id("Button1");
-    private By submitButton = By.id("submitbtn");
-
-
-    public void clickConsentButton() {
-        LOG.info("Click 'Consent' button");
-        driver.findElement(consentButton).click();
-    }
+    private By selectCountry = By.xpath("//span[@role='combobox']");
+    private By insertCountry = By.xpath("//input[@role='textbox']");
+    private By selectYear = By.id("yearbox");
+    private By selectMonth = By.xpath("//select[@ng-model='monthbox']");
+    private By selectDay = By.id("daybox");
+    private By chooseFile = By.xpath("//input[@type=\"file\"]");
 
     public void insertFullName(String fName, String lName) {
         LOG.info("Inserting FirstName and LastName");
         driver.findElement(inputFirstName).sendKeys(fName);
         driver.findElement(inputLastName).sendKeys(lName);
+
     }
 
     public void insertAddress(String address) {
-        LOG.info("Inserting Address");
+        LOG.info("Insert address");
         driver.findElement(inputAddress).sendKeys(address);
+    }
+
+    public void insertEmail(String email) {
+        LOG.info("Insert email");
+        driver.findElement(inputEmail).sendKeys(email);
+    }
+
+    public void insertPhoneNUmber(String phone) {
+        LOG.info("Insert phone number");
+        driver.findElement(inputPhoneNUmber).sendKeys(phone);
+    }
+
+    public void setMaleGender() {
+        LOG.info("Clicking the Male radio button");
+        driver.findElement(maleGender).click();
+    }
+
+    public void setFemaleGender() {
+        LOG.info("Clicking the Female radio button");
+        driver.findElement(femaleGender).click();
+    }
+
+    public void clickCricket() {
+        LOG.info("Clicking Cricket checkmark");
+        driver.findElement(cricketCheckmarks).click();
+    }
+
+    public void clickMovies() {
+        LOG.info("Clicking Movies checkmark");
+        driver.findElement(moviesCheckmarks).click();
+    }
+
+    public void clickHockey() {
+        LOG.info("Clicking Hockey checkmark");
+        driver.findElement(hockeyCheckmarks).click();
+    }
+
+    public void selectLanguage(String language) {
+        LOG.info("Selecting a language");
+        driver.findElement(languageField).click();
+        driver.findElement(By.xpath(String.format(selectLanguage, language)));
+    }
+
+    public void selectSkills(String skill) {
+        LOG.info("Selecting a skill");
+        Select newSkill = new Select(driver.findElement(selectSkills));
+        newSkill.selectByValue(skill);
+    }
+
+    public void selectCountry(String country) {
+        LOG.info("Selecting Country");
+        driver.findElement(selectCountry).click();
+        driver.findElement(insertCountry).sendKeys(country);
+        driver.findElement(selectCountry).sendKeys(Keys.ENTER);
+    }
+
+    public void setDateOfBirth(String year, String month, String day) {
+        LOG.info("Selecting date of birth");
+        Select newYear = new Select(driver.findElement(selectYear));
+        newYear.selectByValue(year);
+        Select newMonth = new Select(driver.findElement(selectMonth));
+        newMonth.selectByValue(month);
+        Select newDay = new Select(driver.findElement(selectDay));
+        newDay.selectByValue(day);
+    }
+
+    public void chooseFile() {
+        LOG.info("Upload file");
+        WebElement fileInput = driver.findElement(By.xpath("//input[@type=\"file\"]"));
+        fileInput.sendKeys("C:/Users/PC/Desktop/Ronnie-Coleman-7.webp");
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("uploadimg()");
 
     }
 
-    public void insertEmailAddress(String emailaddress) {
-        LOG.info("Inserting Email Address");
-        driver.findElement(inputAddress).sendKeys(emailaddress);
-
-    }
-
-    public void insertPhoneNumber(String phonenumber) {
-        LOG.info("Inserting Phone Number");
-        driver.findElement(inputPhoneNumber).sendKeys(phonenumber);
-
-    }
-
-    public void clickSelectGender() {
-        LOG.info("Click 'Male' option");
-        driver.findElement(selectGender).click();
-
-    }
-
-    public void clickSelectHobby() {
-        LOG.info("Click 'Cricket' option");
-        driver.findElement(selectHobby).click();
-
-    }
-
-    public void clickLanguagesField() {
-        LOG.info("Click 'Languages' field");
-        driver.findElement(inputLanguages).click();
-
-    }
-
-    public void selectLanguages() {
-        LOG.info("Select Languages");
-        driver.findElement(selectLanguage1).click();
-        driver.findElement(selectLanguage2).click();
-
-    }
-
-    public void selectJavaSkill() {
-        LOG.info("Select 'Java' skill");
-        driver.findElement(selectSkills).sendKeys("Java");
-    }
-
-    public void selectCountry() {
-        LOG.info("Select 'Romania' option");
-        driver.findElement(selectCountry).sendKeys("Romania");
-    }
-
-    public void selectBirthYear() {
-        LOG.info("Select '1991' option");
-        driver.findElement(selectBirthYear).click();
-
-    }
-
-    public void selectBirthMonth() {
-        LOG.info("Select 'July' option");
-        driver.findElement(selectBirthMonth).click();
-
-    }
-
-    public void selectBirthDay() {
-        LOG.info("Select '27' option");
-        driver.findElement(selectBirthDay).click();
-    }
-
-    public void insertPassword(String Password) {
-        LOG.info("Input 'Password' in field");
-        driver.findElement(inputPassword).sendKeys("Password");
-
-    }
-
-    public void setConfirmPassword(String Password) {
-        LOG.info("Confirm 'Password' in field");
-        driver.findElement(confirmPassword).sendKeys("Password");
-
-    }
-
-    public boolean isUploadButtonDisplayed() {
-        LOG.info("Verify if 'Choose file' button is displayed");
-        return driver.findElement(uploadPhoto).isDisplayed();
-
-    }
-
-    public void clickRefreshButton() {
-        LOG.info("Click 'Refresh' button");
-        driver.findElement(refreshButton).click();
-
-    }
-
-    public void clickSubmitButton() {
-        LOG.info("Click 'Submit' button");
-        driver.findElement(submitButton).click();
-
-    }
 }
+
 
